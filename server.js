@@ -26,6 +26,7 @@ db.on('error', (err) => console.log('mongoDB error: ' + err.message))
 
 app.use(express.urlencoded({ extended: false })) // creates req.body 
 app.use(methodOverride('_method'));
+app.use(express.static('public'))
 
 // mount routes
 
@@ -49,7 +50,7 @@ app.get('/tickets/new' , (req,res) => {
 // Deleted Route 
 
 app.delete('/tickets/:id' , (req,res) => {
-    Ticket.findByIdAndRemove(req.params.id, (err,deletedticket) => {
+    Ticket.findByIdAndDelete(req.params.id, (err,deletedticket) => {
         res.redirect('/tickets');
     });
 });
@@ -76,8 +77,8 @@ app.post('/tickets', (req,res) => {
 // EDIT 
 
 app.get ('/tickets/:id/edit', (req,res) => {
-    Ticket.findById (req.params.id, (err, foundTicket) => {
-        res.render ('edit.ejs', {ticket: foundTicket})
+    Ticket.findById(req.params.id, (err, foundTicket) => {
+        res.render('edit.ejs', { ticket: foundTicket })
     });
 });
 //Show route 

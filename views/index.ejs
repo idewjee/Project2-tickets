@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css" type='text/css'>
     <title>Ticket Site</title>
 </head>
+
 <body>
     <h1> Tickets for sale </h1>
-    <ul stlye = "list-style: none;"> 
-        <% tickets.forEach(t => { %>
-            <li> 
+    <ul stlye="list-style: none;">
+        <% tickets.forEach(t=> { %>
+            <li>
 
-                <form stlye="display: inline; margin-right: 1rem;" action="/tickets/<&= t._id%>?_method=DELETE" method="POST">
-                <input type="submit" value="Delete">
-                    </form>
-                <a style = "margin: 0 1rem 0 1 rem;" href="/tickets/<%= t._id%>>/edit"> EDIT </a> 
-                
                 <a href="/tickets/<%= t._id %>">
 
-                    <%= t.Event %>   
-                 </a> 
+                    <%= t.Event %>
+                </a>
+                <div class="options ">
+                    <form style="display: inline; margin-right: 1rem;" action="/tickets/<%= t._id%>?_method=DELETE"
+                        method="POST">
+                        <input class="deleteBtn" type="submit" value="Delete">
+                    </form>
+                    <a style="margin: 0 1rem 0 1 rem;" href="/tickets/<%= t._id%>/edit"> Edit </a>
+                </div>
 
 
-            </li> 
-        <% }) %>
+            </li>
+            <% }) %>
     </ul>
-    <a href="/tickets/new">  Insert your ticket information </a>
+    <a href="/tickets/new"> Insert your ticket information </a>
 </body>
+
 </html>
