@@ -8,13 +8,20 @@
 </head>
 <body>
     <h1> Tickets for sale </h1>
-    <ul> 
+    <ul stlye = "list-style: none;"> 
         <% tickets.forEach(t => { %>
             <li> 
-                 <a href="/tickets/<%= t._id %>">
+
+                <form stlye="display: inline; margin-right: 1rem;" action="/tickets/<&= t._id%>?_method=DELETE" method="POST">
+                <input type="submit" value="Delete">
+                    </form>
+                <a style = "margin: 0 1rem 0 1 rem;" href="/tickets/<%= t._id%>>/edit"> EDIT </a> 
+                
+                <a href="/tickets/<%= t._id %>">
 
                     <%= t.Event %>   
                  </a> 
+
 
             </li> 
         <% }) %>

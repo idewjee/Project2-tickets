@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket App</title>
+</head>
+<body>
+    <h1> New ticket page </h1>
+    <form action="/tickets/<%=  ticket._id %>?_method=PUT" method="post">
+        Event: <input type = "text" name = "Event" value="<%= ticket.Event %>"> <br>
+        Section: <input type = "text" name = "Section" value="<%= ticket.Section %>"> <br>
+        Row: <input type = "text" name = "Row" value="<%= ticket.Row %>"> <br>
+        Price: <input type = "text" name = "Price" value="<%= ticket.Price %>"> <br>
+        completed: <input type = "checkbox" name = "completed"> <br>
+        <input type = "submit" value = "Add new tickets"><br>
+
+    </form>
+    
+</body>
+</html>

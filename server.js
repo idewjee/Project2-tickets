@@ -3,6 +3,7 @@
 const express = require ('express');
 const mongoose = require ('mongoose');
 const Ticket = require ('./models/tickets');
+const methodOverride = require ('method-override');
 
 //initialize app 
 const app = express ();
@@ -24,8 +25,11 @@ db.on('error', (err) => console.log('mongoDB error: ' + err.message))
 // mount middleware 
 
 app.use(express.urlencoded({ extended: false })) // creates req.body 
+app.use(methodOverride('_method'));
 
 // mount routes
+
+// seed route 
 
 // Index route 
 
@@ -39,6 +43,15 @@ app.get('/tickets' , (req,res) => {
 
 app.get('/tickets/new' , (req,res) => {
     res.render('new.ejs');
+});
+
+
+// Deleted Route 
+
+app.delete('/tickets/:id' , (req,res) => {
+    Ticket.findByIdAndRemove(req.params.id, (err,deletedticket) => {
+        res.redirect('/tickets');
+    });
 });
 
 //Create Route 
@@ -60,6 +73,13 @@ app.post('/tickets', (req,res) => {
 })
 
 
+// EDIT 
+
+app.get ('/tickets/:id/edit', (req,res) => {
+    Ticket.findById (req.params.id, (err, foundTicket) => {
+        res.render ('edit.ejs', {ticket: foundTicket})
+    });
+});
 //Show route 
 
 app.get('/tickets/:id' , (req,res) => { 
