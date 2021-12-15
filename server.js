@@ -94,6 +94,19 @@ app.get('/tickets/:id' , (req,res) => {
     });
 });
 
+// Update Route 
+
+app.put('/tickets/:id', (req,res) => {
+    if (req.body.completed === "on") {
+        req.body.completed = true 
+    } else {
+        req.body.completed = false 
+    }
+    Ticket.findByIdAndUpdate(req.params.id, req.body, { new: true }, (error, ticket) =>{
+        res.redirect (`/tickets/${req.params.id}`)
+    } )
+})
+
 // tell the app to listen 
 
 const PORT = process.env.PORT;
