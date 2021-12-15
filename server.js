@@ -35,9 +35,14 @@ app.use(express.static('public'))
 // Index route 
 
 app.get('/tickets' , (req,res) => {
-    Ticket.find({}, (err,allTickets) => {
-        res.render('index.ejs', {tickets: allTickets});   // {} pass datata into a  
-    });
+    try {
+        Ticket.find({}, (err,allTickets) => {
+            res.render('index.ejs', {tickets: allTickets});   // {} pass datata into a  
+        }); 
+    } catch (error) {
+        console.log (error);
+    }
+  
 });
 
 //New Route 
